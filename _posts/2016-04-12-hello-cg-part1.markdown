@@ -3,7 +3,6 @@ layout: post
 title:  "计算机图形技术入门"
 date:   2016-04-12 13:10:00
 categories: ComputerScience
-tags: ComputerGraphics
 ---
 
 游戏中的画面是怎样呈现在屏幕上的？
