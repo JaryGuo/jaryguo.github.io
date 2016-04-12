@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "计算机图形技术入门"
-date:   2016-04-12 13:10:00
+date:   2016-04-12 00:10:00
 categories: ComputerScience
 ---
 
