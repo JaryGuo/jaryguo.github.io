@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 我
+title: Denny's Info
 permalink: /me/
 ---
 
