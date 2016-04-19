@@ -5,9 +5,15 @@ permalink: /skill/
 ---
 
 ComputerScience  
+
 * front-end
-   * android
-   * ios
+
+  * android
+
+  * ios
+
 * windows
+
 * directx
+
 * web
