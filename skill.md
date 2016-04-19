@@ -1,6 +1,6 @@
 ---
 layout: page
-title: SkillTree
+title: Skill Tree
 permalink: /skill/
 ---
 
