@@ -6,14 +6,36 @@ permalink: /skill/
 
 ComputerScience  
 
-* front-end
+* Front-end
 
-  * android
+  * Platform
 
-  * ios
+    * Android
 
-* windows
+    * iOS/MacOS
 
-* directx
+    * Windows
 
-* web
+      * DirectX
+
+    * Webkit
+ 
+    * Game Engines
+
+      * Cocos
+
+      * Unity
+  
+  * Graphics
+
+    * OpenGL
+  
+* Back-end
+
+    * TCP/IP Model
+
+      * Http
+
+      * Sockect
+
+
