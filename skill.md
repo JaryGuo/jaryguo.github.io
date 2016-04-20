@@ -4,9 +4,9 @@ title: Skill Tree
 permalink: /skill/
 ---
 
-ComputerScience  
+## ComputerScience  
 
-## Front-end
+### Front-end
 * Platform
   * Android
   * iOS/MacOS
@@ -19,7 +19,7 @@ ComputerScience
 * Graphics
   * OpenGL
 
-## Back-end
+### Back-end
 * TCP/IP Model
   * Http
   * Sockect
