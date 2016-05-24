@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <!-- Canonical link to help search engines -->
+  <link rel="canonical" href="/computerscience,/log/2016/05/17/learn-about-gpu.html"/>
+
+  <!-- Basic meta elements -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"/>
+
+  <!--   Dublin Core metadata for Zotero -->  
+  <meta name="DC.title" content="那些跟GPU有关的事" />
+  <meta name="DC.creator" content="" />
+  <meta name="DC.contributor" content="" />
+  <meta name="DC.date" content="" />
+  <meta name="DC.rights" content="" />
+  <meta name="DC.source" content="Denny's Website" />
+  
+  <!-- Open Graph metadata -->
+  <meta property="og:title" content="那些跟GPU有关的事"/>
+  <meta property="og:author" content=""/>
+  <meta property="og:book:release_date" content=""/>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://jaryguo.github.io"/>
+  <meta property="og:image" content="http://elotroalex.github.io/ed/public/apple-touch-icon-precomposed.png"/>
+   
+  <title>
+    
+      那些跟GPU有关的事
+    
+  </title>
+
+  <!-- CSS links -->
+  <link rel="stylesheet" href="/public/css/syntax.css"/>
+  <link rel="stylesheet" href="/public/css/ed.css"/>
+ 
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/public/apple-touch-icon-precomposed.png"/>
+  <link rel="shortcut icon" href="/public/favicon.ico"/>
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml"/>
+</head>
+
+
+  <body>
+
+    <!-- This if statement decides which sidebar to use -->
+    
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>个人博客，基于Jekyll & Github
+</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/me/">About Me</a>
+        
+      
+    
+      
+    
+
+    <!-- The code below is used for manually entered links  -->
+
+    <!-- <a class="sidebar-nav-item" href="https://via.hypothes.is/http://jaryguo.github.io/computerscience,/log/2016/05/17/learn-about-gpu.html">Annotate me</a>
+    <a class="sidebar-nav-item" href="https://github.com/elotroalex/ed" target="_blank">GitHub project</a> -->
+    <!-- <span class="sidebar-nav-item">Currently v</span> -->
+  </nav>
+
+  <div class="sidebar-item">
+    <p>Distributed with an MIT license.</p>
+  </div>
+</div>
+
+    
+
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Denny's Website</a>
+            <br><small></small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content" id="main">
+        <div class="post">
+  <h1 class="post-title">那些跟GPU有关的事</h1>
+  <p>其实到目前为止，还没有机会从事3D的游戏项目。不过凭着这半年的自学，仿佛也有豁然开朗之势。最近为了在公司做一个分享会，于是便梳理了一下自己在渲染技术方面的知识，虽然没有做过项目，并且也只有半年的积累，但有关图形学的知识，或者说那些框架上的知识点已经有所掌握。</p>
+
+<p>说回一开始的经历吧，应该和许多人一样，没有什么图形学的基础，一开始可能连OpenCV和OpenGL是两个的区别是啥也搞不清楚，然后就开始去找OpenGL的教程来看，一开始看着觉得玄呐，在MacOS上，还得搞个glut的框架（MacOS自带glut）。那会连glut这东西的技术含量也搞不清，总之都觉得高大上就是了。glut有点蛋疼的是，好多年前就不维护了，所以拿着来玩也只能玩玩早期的OpenGL版本。glut的继承者freeglut只搞了一个Windows的版本，但我实在是懒得去开虚拟机，以及装VS。</p>
+
+<p>后来找到了MacOS可以用的另一个框架，GLFW。不过这方面的教程比较少吧。与此同时，我开始找一些书来看了，一开始看到的是OpenGL SuperBible————蓝皮书————中文版，一开始还看的听懂，但是稍微看几张就懵懂了。后来我又找了OpenGL Program Guide 8th Edition———红皮书。这回直接看生肉（看生肉还是挺有好处的，很多词汇被翻译后就失去了原来的汁味）。一开始也还能看的懂，不过后面看着看着还是觉得辛苦。后来知道，红皮书是那种权威的教材，蓝皮书就没有这么高的地位了，其实就是那种类似21天学会C++的地步的书。在这个过程中，我是两本反复交换着看，并且结合着Cocos的渲染代码，慢慢的才有些许概念，才懂得OpenGL到底是个什么东西。</p>
+
+<p>OpenGL那么玄乎，是因为它是用C语言写的（或者说他的接口是C的方式提供的），一开始没习惯C，会不习惯那种写代码的方式，没有类对象的概念，每个方法都要主动传一个参数，类似于当作指针，然后函数名再加上参数去操作这个对象。（虽然说C++是有点点基础，但真没有怎么做过C的东西。）</p>
+
+<p>因为知道OpenGL的风格之后，就觉得简单了很多。不过很长一段时间都没搞懂API到底是什么鬼。一直到最近，我才搞懂。API的接口和规范，是OpenGL提供的，任何人、组织都可以去OpenGL的官网上下载他们提供的profile文档，然后根据这个文档来实现OpenGL的库。像这个nVidia、ATI、索尼游戏部门等等，他们都有自己的一套实现的方式。下载了OpenGL的SDK后，我们初始化OpenGL的状态机的所有操作，是通过这个SDK自己去系统寻找OpenGL的实现库，OpenGL的实现库又会调用GPU提供的driver接口，最后成功的使用到GPU的硬件优势。</p>
+
+<p>不过看了那么多OpenGL的教程，其实还是有点懵懂。因为没有学好原理，就要学怎么用，肯定是会很吃力，而且事倍功半。所以我后来找到了一个网站，叫ScratchAPixel，上面提供了很详细的渲染技术的知识，没有教科书那么啰嗦，而且很生动清晰容易懂。也是在这个网站上，我才懂得什么事Rasterization，顺便还懂得了Ray Tracing————这个东西在OpenGL中是不会用的，不过为了生存更好的光线，这东西还是有点用。</p>
+
+<p>好了，就啰嗦到这里吧。</p>
+
+</div>
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+
+    // Highlight search Query
+    var url = window.location.href;
+      if (url.lastIndexOf("?q=") > 0) {
+        // get the index of the parameter, add three (to account for length)
+        var stringloc = url.lastIndexOf("?q=") + 3;
+        // get the substring (query) and decode
+        var searchquery = decodeURIComponent(url.substr(stringloc));
+        // regex matches at beginning of line, end of line or word boundary, useful for poetry
+        var regex = new RegExp("(?:^|\\b)(" + searchquery + ")(?:$|\\b)", "gim");
+        // get, add mark and then set content
+        var content = document.getElementById("main").innerHTML;
+        document.getElementById("main").innerHTML = content.replace(regex, "<mark>$1</mark>");
+      }
+
+    // Toggle sidebar  
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>

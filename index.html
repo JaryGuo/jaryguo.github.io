@@ -1,23 +1,29 @@
 ---
 layout: default
+title: Home
 ---
+<div class="introduction">
+  <h1>Hi.</h1>
 
-<div class="home">
+<p>这个是Denny的博客，主要呢，记录我的技术之路。忘了介绍了，我是一个游戏开发者，在这里将记录着我跟每一个程序、每一个软件的邂逅之路。</p>
+</div>
 
-  <h1 class="page-heading">Posts</h1>
+<hr>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
+<div class="toc">
+  <h2>我的所有文章</h2>
+  <ul class="post">
+  {% for item in site.posts do %}
+  
+    <li class="post-title">
+      <a href="{{ site.baseurl }}{{ item.url }}">
+        {{ item.title }}
+      </a>
+    </li>
+  {% endfor %}
+  </ul>  
 
 </div>
+
+
+
