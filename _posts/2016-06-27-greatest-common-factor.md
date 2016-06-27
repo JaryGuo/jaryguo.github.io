@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "辗转相除法"
+title:  "说说辗转相除法原理"
 categories: Math
 ---
 
