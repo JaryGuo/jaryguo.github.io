@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Luajit反编译之探索记"
-categories: ComputerScience, Log
+categories: Log
 ---
 
 由于工作需求，要反编译一个luajit编译过的文件。百度反编译luajit，得到的信息是目前没有此类成熟的反编译器。所以，如果你用luajit编译了代码，基本上不用担心被别人破解（2015.12）。
