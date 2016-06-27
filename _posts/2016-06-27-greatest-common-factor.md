@@ -12,8 +12,8 @@ categories: Math
 令`c`为`M`, `N`的最大公因数，  
 则可得  
 ```
-M = m * c
-N = n * c
+M = m * c  
+N = n * c  
 ```
 其中`m`,`n`为某整数，使得`m * c` 得 `M`， `n * c` 得 `N`。  
 
@@ -21,11 +21,11 @@ N = n * c
 
 辗转相除法的第一步，  
 ```
-M / N = a ... L
+M / N = a ... L  
 ```
 其实也可以理解为  
 ```
-L = (m - a * n) * c
+L = (m - a * n) * c  
 ```
 为什么呢？这就是简单的除法原理呀。不解释了，接着走。  
 
@@ -40,9 +40,9 @@ L = (m - a * n) * c
 
 已知  
 ```
-M = m * c
-N = n * c
-L = (m - a * n) * c
+M = m * c  
+N = n * c  
+L = (m - a * n) * c  
 ```
 
 其中`m`和`n`互质，所以c是`M`和`N`最大公因数。  
@@ -55,15 +55,15 @@ L = (m - a * n) * c
 
 如果不是互质的，那么  
 ```
-m - a * n = x * d
-n = y * d
+m - a * n = x * d  
+n = y * d  
 ```
 那么  
 ```
-(m - a * n) + (a * n) = xd + a * (y * d) = (x + a*y) * d
-(m - a * n) + (a * n) = m
-s.t. m = (x + a*y) * d
-while n = y * d
+(m - a * n) + (a * n) = xd + a * (y * d) = (x + a*y) * d  
+(m - a * n) + (a * n) = m  
+s.t. m = (x + a*y) * d  
+while n = y * d  
 ```
 这么一来，`m`和`n`还叫互质吗？？  
 
