@@ -2,11 +2,16 @@
 title: Denny's Website
 email: jaryguo1990@163.com
 description: > # this means to ignore newlines until "baseurl:"
-  个人博客，基于Jekyll & Github
+  Personal blog，used Jekyll & running on Github
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://jaryguo.github.io" # the base hostname & protocol for your site
 #twitter_username: jekyllrb
-#github_username:  jekyll
+github_username:  jaryguo
 
 # Build settings
 markdown: kramdown
+
+timezone: Asia/Shanghai
+
+kramdown:
+  input: GFM
