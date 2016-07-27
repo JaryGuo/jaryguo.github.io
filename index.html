@@ -3,21 +3,25 @@ layout: default
 title: Home
 ---
 <div class="introduction">
-  <h1>Hello!</h1>
+  <h1>最新状态</h1>
 
-<p>我是一个游戏开发者，本博客主要收集我对程序开发的一些所思所想，以及一些乱入的文章。</p>
+<p>...</p>
 </div>
 
 <hr>
 
 <div class="toc">
-  <h2>我的所有文章</h2>
+  <h2>所有文章</h2>
   <ul class="post">
-  {% for item in site.posts do %}
-  
+  {% assign posts = site.posts | sort:'prior' %}
+  {% for item in posts do %}
     <li class="post-title">
       <a href="{{ site.baseurl }}{{ item.url }}">
-        {{ item.title }}
+      {% if item.prior and item.prior > 0 %}
+          [置顶]{{ item.title }}
+      {% else %}
+          {{ item.title }}
+      {% endif %}
       </a>
     </li>
   {% endfor %}
