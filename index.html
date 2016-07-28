@@ -22,7 +22,7 @@ title: Home
     </li>
     {% endif %}
   {% endfor %}
-  {% for item in posts do %}
+  {% for item in site.posts do %}
     {% if item.prior and item.prior > 0 %}
     {% else %}
       <li class="post-title">
