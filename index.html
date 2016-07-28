@@ -13,17 +13,24 @@ title: Home
 <div class="toc">
   <h2>所有文章</h2>
   <ul class="post">
-  {% assign posts = site.posts | sort:'date' | sort:'prior' | reverse %}
-  {% for item in posts do %}
+  {% for item in site.posts do %}
+    {% if item.prior and item.prior > 0 %}
     <li class="post-title">
       <a href="{{ site.baseurl }}{{ item.url }}">
-      {% if item.prior and item.prior > 0 %}
-          [置顶]{{ item.title }}
-      {% else %}
-          {{ item.title }}
-      {% endif %}
+        [置顶]{{ item.title }}
       </a>
     </li>
+    {% endif %}
+  {% endfor %}
+  {% for item in posts do %}
+    {% if item.prior and item.prior > 0 %}
+    {% else %}
+      <li class="post-title">
+        <a href="{{ site.baseurl }}{{ item.url }}">
+            {{ item.title }}
+        </a>
+      </li>
+    {% endif %}
   {% endfor %}
   </ul>  
 
