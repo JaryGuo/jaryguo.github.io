@@ -13,7 +13,7 @@ title: Home
 <div class="toc">
   <h2>所有文章</h2>
   <ul class="post">
-  {% assign posts = site.posts | sort:'prior' | reverse %}
+  {% assign posts = site.posts | sort:'date' | reverse | sort:'prior' | reverse %}
   {% for item in posts do %}
     <li class="post-title">
       <a href="{{ site.baseurl }}{{ item.url }}">
