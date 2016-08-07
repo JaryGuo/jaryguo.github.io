@@ -5,6 +5,7 @@ categories: ComputerScience
 ---
 
 Javascriptd的原型链是一个比较容易混淆的概念。根据wiki的定义:
+
 	prototype, a property of all JavaScript objects, through which they can inherit further functionality
 
 实际上通过测试却没有得到定义的结果：
