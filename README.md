@@ -1,7 +1,5 @@
-N年前的博客了，废弃，新的访问jaryguo.cn
+# jaryguo
 
----
+Minimal homepage for [jaryguo.github.io](https://jaryguo.github.io).
 
-# jaryguo.github.io
-
-这个是一个个人博客项目，使用Jekyll生成器生成静态页面。
+Plain HTML, CSS, and JavaScript served from the repository root by GitHub Pages. An empty `.nojekyll` file tells Pages to publish the files as-is.

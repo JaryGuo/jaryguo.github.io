@@ -1,49 +1,395 @@
----
-layout: default
-title: Home
----
-<div class="introduction">
-  <h1>最新状态</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#060914">
+  <title>jaryguo</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23060914'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23b7e4ff'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%238ecbff' stroke-opacity='0.55' stroke-width='1.4'/%3E%3C/svg%3E">
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+    }
 
-<p>...</p>
-</div>
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
+      background: #060914;
+      color-scheme: dark;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
 
-<hr>
+    .aurora {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 90% 70% at 50% 42%, rgba(28, 58, 120, 0.38), transparent 68%),
+        #060914;
+    }
 
-<div class="toc">
-  <h2>所有文章</h2>
-  <ul class="post">
-  {% for item in site.posts do %}
-    {% if item.prior and item.prior > 0 %}
-    <li class="post-title">
-      <a href="{{ site.baseurl }}{{ item.url }}">
-        [置顶]{{ item.title }}
-      </a>
-    </li>
-    {% endif %}
-  {% endfor %}
-  {% for item in site.posts do %}
-    {% if item.prior and item.prior > 0 %}
-    {% else %}
-      <li class="post-title">
-        <a href="{{ site.baseurl }}{{ item.url }}">
-            {{ item.title }}
-        </a>
-      </li>
-    {% endif %}
-  {% endfor %}
-  </ul>  
+    .aurora span {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(48px);
+      opacity: 0.75;
+      will-change: transform;
+    }
 
-</div>
+    .aurora span:nth-child(1) {
+      width: min(58vw, 640px);
+      height: min(58vw, 640px);
+      left: -8vw;
+      top: -12vh;
+      background: rgba(64, 132, 220, 0.5);
+      animation: drift-a 24s ease-in-out infinite alternate;
+    }
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    .aurora span:nth-child(2) {
+      width: min(48vw, 520px);
+      height: min(48vw, 520px);
+      right: -10vw;
+      bottom: -8vh;
+      background: rgba(92, 64, 196, 0.42);
+      animation: drift-b 28s ease-in-out infinite alternate;
+    }
 
-  ga('create', 'UA-81483447-1', 'auto');
-  ga('send', 'pageview');
-</script>
+    .aurora span:nth-child(3) {
+      width: min(36vw, 420px);
+      height: min(36vw, 420px);
+      left: 32vw;
+      top: 18vh;
+      background: rgba(36, 186, 196, 0.28);
+      animation: drift-c 20s ease-in-out infinite alternate;
+    }
 
+    #field {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+    }
 
+    main {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+    }
+
+    main::before {
+      content: "";
+      position: absolute;
+      width: min(78vw, 680px);
+      height: min(42vw, 340px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(132, 188, 255, 0.16), transparent 70%);
+      filter: blur(6px);
+      pointer-events: none;
+    }
+
+    h1 {
+      position: relative;
+      margin: 0;
+      padding-left: 0.16em;
+      font-weight: 500;
+      font-size: clamp(3.25rem, 12vw, 7.75rem);
+      letter-spacing: 0.16em;
+      line-height: 1;
+      background-image: linear-gradient(115deg, #ffffff 0%, #def4ff 32%, #8ecbff 62%, #c9c0ff 100%);
+      background-size: 220% 100%;
+      background-position: 0% 50%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      filter: drop-shadow(0 0 22px rgba(126, 196, 255, 0.45));
+      animation: sheen 16s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 42%, rgba(4, 6, 14, 0.58) 100%);
+    }
+
+    @keyframes drift-a {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(8vw, 10vh, 0) scale(1.12); }
+    }
+
+    @keyframes drift-b {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(-7vw, -8vh, 0) scale(1.08); }
+    }
+
+    @keyframes drift-c {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(4vw, -6vh, 0) scale(0.92); }
+    }
+
+    @keyframes sheen {
+      from { background-position: 0% 50%; }
+      to { background-position: 100% 50%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .aurora span,
+      h1 {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="aurora" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <main>
+    <h1>jaryguo</h1>
+  </main>
+  <script>
+    (function () {
+      var canvas = document.getElementById("field");
+      var ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      var motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      var pointer = { x: 0, y: 0, active: false };
+      var width = 0;
+      var height = 0;
+      var particles = [];
+      var raf = 0;
+      var running = false;
+
+      function rand(min, max) {
+        return min + Math.random() * (max - min);
+      }
+
+      function linkDistance() {
+        return Math.max(88, Math.min(150, Math.min(width, height) * 0.22));
+      }
+
+      function syncParticles() {
+        var count = Math.round(Math.max(28, Math.min(96, (width * height) / 17000)));
+        if (particles.length > count) {
+          particles.length = count;
+          return;
+        }
+        while (particles.length < count) {
+          particles.push({
+            x: rand(0, width),
+            y: rand(0, height),
+            vx: rand(-0.22, 0.22),
+            vy: rand(-0.22, 0.22),
+            r: rand(1.05, 2.15)
+          });
+        }
+      }
+
+      function draw() {
+        var maxLink = linkDistance();
+        var reach = 160;
+        var i, j, a, b, dx, dy, dist, alpha;
+
+        ctx.clearRect(0, 0, width, height);
+        ctx.lineWidth = 1;
+
+        for (i = 0; i < particles.length; i++) {
+          a = particles[i];
+          for (j = i + 1; j < particles.length; j++) {
+            b = particles[j];
+            dx = a.x - b.x;
+            dy = a.y - b.y;
+            dist = Math.hypot(dx, dy);
+            if (dist < maxLink) {
+              alpha = (1 - dist / maxLink) * 0.38;
+              ctx.strokeStyle = "rgba(168, 214, 255, " + alpha.toFixed(3) + ")";
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.stroke();
+            }
+          }
+
+          if (pointer.active) {
+            dx = a.x - pointer.x;
+            dy = a.y - pointer.y;
+            dist = Math.hypot(dx, dy);
+            if (dist < reach) {
+              alpha = (1 - dist / reach) * 0.55;
+              ctx.strokeStyle = "rgba(210, 236, 255, " + alpha.toFixed(3) + ")";
+              ctx.beginPath();
+              ctx.moveTo(pointer.x, pointer.y);
+              ctx.lineTo(a.x, a.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        for (i = 0; i < particles.length; i++) {
+          a = particles[i];
+          ctx.beginPath();
+          ctx.fillStyle = "rgba(150, 205, 255, 0.18)";
+          ctx.arc(a.x, a.y, a.r * 5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.beginPath();
+          ctx.fillStyle = "rgba(236, 248, 255, 0.92)";
+          ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function tick() {
+        var reduced = motionQuery.matches;
+        var reach = 150;
+        var i, p, dx, dy, dist, pull, speed, cap;
+
+        if (!reduced) {
+          for (i = 0; i < particles.length; i++) {
+            p = particles[i];
+            if (pointer.active) {
+              dx = pointer.x - p.x;
+              dy = pointer.y - p.y;
+              dist = Math.hypot(dx, dy);
+              if (dist > 0.5 && dist < reach) {
+                pull = ((reach - dist) / reach) * 0.018;
+                p.vx += (dx / dist) * pull;
+                p.vy += (dy / dist) * pull;
+              }
+            }
+            p.vx *= 0.992;
+            p.vy *= 0.992;
+            speed = Math.hypot(p.vx, p.vy);
+            cap = 0.72;
+            if (speed > cap) {
+              p.vx = (p.vx / speed) * cap;
+              p.vy = (p.vy / speed) * cap;
+            } else if (speed < 0.05) {
+              p.vx += rand(-0.03, 0.03);
+              p.vy += rand(-0.03, 0.03);
+            }
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x <= 0) {
+              p.x = 0;
+              p.vx = Math.abs(p.vx);
+            } else if (p.x >= width) {
+              p.x = width;
+              p.vx = -Math.abs(p.vx);
+            }
+            if (p.y <= 0) {
+              p.y = 0;
+              p.vy = Math.abs(p.vy);
+            } else if (p.y >= height) {
+              p.y = height;
+              p.vy = -Math.abs(p.vy);
+            }
+          }
+        }
+
+        draw();
+        if (!reduced && running) {
+          raf = requestAnimationFrame(tick);
+        }
+      }
+
+      function resize() {
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var i, p;
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.max(1, Math.floor(width * dpr));
+        canvas.height = Math.max(1, Math.floor(height * dpr));
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        syncParticles();
+        for (i = 0; i < particles.length; i++) {
+          p = particles[i];
+          if (p.x < 0) p.x = 0;
+          if (p.y < 0) p.y = 0;
+          if (p.x > width) p.x = width;
+          if (p.y > height) p.y = height;
+        }
+        draw();
+      }
+
+      function setPointer(event, active) {
+        pointer.x = event.clientX;
+        pointer.y = event.clientY;
+        pointer.active = active;
+      }
+
+      function stopLoop() {
+        running = false;
+        cancelAnimationFrame(raf);
+      }
+
+      function startLoop() {
+        if (running || motionQuery.matches) return;
+        running = true;
+        raf = requestAnimationFrame(tick);
+      }
+
+      window.addEventListener("pointermove", function (event) {
+        setPointer(event, true);
+      }, { passive: true });
+      window.addEventListener("pointerdown", function (event) {
+        setPointer(event, true);
+      }, { passive: true });
+      window.addEventListener("pointerup", function () {
+        pointer.active = false;
+      });
+      window.addEventListener("pointercancel", function () {
+        pointer.active = false;
+      });
+      document.documentElement.addEventListener("pointerleave", function () {
+        pointer.active = false;
+      });
+      window.addEventListener("resize", resize);
+
+      function onMotionChange() {
+        if (motionQuery.matches) {
+          stopLoop();
+          draw();
+        } else {
+          startLoop();
+        }
+      }
+
+      if (typeof motionQuery.addEventListener === "function") {
+        motionQuery.addEventListener("change", onMotionChange);
+      } else if (typeof motionQuery.addListener === "function") {
+        motionQuery.addListener(onMotionChange);
+      }
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+          stopLoop();
+        } else {
+          startLoop();
+        }
+      });
+
+      resize();
+      startLoop();
+    })();
+  </script>
+</body>
+</html>
