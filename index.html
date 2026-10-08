@@ -1,395 +1,134 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#060914">
-  <title>jaryguo</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23060914'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23b7e4ff'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%238ecbff' stroke-opacity='0.55' stroke-width='1.4'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#090b09">
+  <meta name="description" content="Jary Guo — a personal space at the intersection of code, motion and imagination.">
+  <meta property="og:title" content="jaryguo — Beyond the ordinary">
+  <meta property="og:description" content="Code. Motion. Possibility. Step into my digital space.">
+  <meta property="og:type" content="website">
+  <title>jaryguo — Beyond the ordinary</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23090b09'/%3E%3Cpath d='M13 10h14v16q0 8-8 8h-5v-6h4q3 0 3-3v-9h-8z' fill='%23ccff80'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600&display=swap" rel="stylesheet">
   <style>
-    html,
-    body {
-      margin: 0;
-      height: 100%;
-    }
-
-    body {
-      min-height: 100vh;
-      min-height: 100dvh;
-      overflow: hidden;
-      background: #060914;
-      color-scheme: dark;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-
-    .aurora {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      pointer-events: none;
-      background:
-        radial-gradient(ellipse 90% 70% at 50% 42%, rgba(28, 58, 120, 0.38), transparent 68%),
-        #060914;
-    }
-
-    .aurora span {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(48px);
-      opacity: 0.75;
-      will-change: transform;
-    }
-
-    .aurora span:nth-child(1) {
-      width: min(58vw, 640px);
-      height: min(58vw, 640px);
-      left: -8vw;
-      top: -12vh;
-      background: rgba(64, 132, 220, 0.5);
-      animation: drift-a 24s ease-in-out infinite alternate;
-    }
-
-    .aurora span:nth-child(2) {
-      width: min(48vw, 520px);
-      height: min(48vw, 520px);
-      right: -10vw;
-      bottom: -8vh;
-      background: rgba(92, 64, 196, 0.42);
-      animation: drift-b 28s ease-in-out infinite alternate;
-    }
-
-    .aurora span:nth-child(3) {
-      width: min(36vw, 420px);
-      height: min(36vw, 420px);
-      left: 32vw;
-      top: 18vh;
-      background: rgba(36, 186, 196, 0.28);
-      animation: drift-c 20s ease-in-out infinite alternate;
-    }
-
-    #field {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      display: block;
-      pointer-events: none;
-    }
-
-    main {
-      position: relative;
-      z-index: 2;
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: grid;
-      place-items: center;
-    }
-
-    main::before {
-      content: "";
-      position: absolute;
-      width: min(78vw, 680px);
-      height: min(42vw, 340px);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(132, 188, 255, 0.16), transparent 70%);
-      filter: blur(6px);
-      pointer-events: none;
-    }
-
-    h1 {
-      position: relative;
-      margin: 0;
-      padding-left: 0.16em;
-      font-weight: 500;
-      font-size: clamp(3.25rem, 12vw, 7.75rem);
-      letter-spacing: 0.16em;
-      line-height: 1;
-      background-image: linear-gradient(115deg, #ffffff 0%, #def4ff 32%, #8ecbff 62%, #c9c0ff 100%);
-      background-size: 220% 100%;
-      background-position: 0% 50%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      color: transparent;
-      filter: drop-shadow(0 0 22px rgba(126, 196, 255, 0.45));
-      animation: sheen 16s ease-in-out infinite alternate;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 3;
-      pointer-events: none;
-      background: radial-gradient(ellipse at center, transparent 42%, rgba(4, 6, 14, 0.58) 100%);
-    }
-
-    @keyframes drift-a {
-      from { transform: translate3d(0, 0, 0) scale(1); }
-      to { transform: translate3d(8vw, 10vh, 0) scale(1.12); }
-    }
-
-    @keyframes drift-b {
-      from { transform: translate3d(0, 0, 0) scale(1); }
-      to { transform: translate3d(-7vw, -8vh, 0) scale(1.08); }
-    }
-
-    @keyframes drift-c {
-      from { transform: translate3d(0, 0, 0) scale(1); }
-      to { transform: translate3d(4vw, -6vh, 0) scale(0.92); }
-    }
-
-    @keyframes sheen {
-      from { background-position: 0% 50%; }
-      to { background-position: 100% 50%; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .aurora span,
-      h1 {
-        animation: none;
-      }
-    }
+    :root{color-scheme:dark;--bg:#090b09;--ink:#eff2e9;--muted:#a1a798;--accent:#ccff80;--line:rgba(218,230,199,.17);--mx:50%;--my:45%}
+    *{box-sizing:border-box}[hidden]{display:none!important}html,body{margin:0;min-height:100%;background:var(--bg)}body{font-family:Arial,Helvetica,sans-serif;color:var(--ink);overflow-x:hidden}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:7px}::selection{background:var(--accent);color:#090b09}
+    .scene{position:relative;isolation:isolate;min-height:760px;height:100svh;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#1d2318 0%,#10140e 35%,#090b09 70%)}
+    .scene:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.8' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}
+    .grid{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:100px 100px;opacity:.12;mask-image:linear-gradient(#000,transparent 80%);pointer-events:none}
+    #field{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+    .fallback-halo{position:absolute;top:4%;left:50%;width:620px;height:620px;transform:translateX(-50%) rotate(-25deg) scaleY(.7);border:1px solid #b2d87655;border-radius:50%;box-shadow:0 0 100px #a9ff5910,inset 0 0 70px #a9ff5910;pointer-events:none}.canvas-ready .fallback-halo{opacity:0}
+    header,footer{position:absolute;left:4.5%;right:4.5%;z-index:4;display:flex;justify-content:space-between;align-items:center}header{top:32px}.wordmark{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;letter-spacing:-.04em}.mark{display:grid;place-items:center;width:30px;height:30px;border:1px solid #c5d2b34d;border-radius:50%;font-size:19px;color:var(--accent)}.edition{font:10px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.14em;color:var(--muted)}.github{display:flex;align-items:center;gap:24px;padding:12px 0;font-size:12px}.github svg{width:17px;height:17px;transition:transform .25s}.github:hover svg{transform:translate(3px,-3px);color:var(--accent)}
+    main{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:115px 4.5% 140px;text-align:center;pointer-events:none}.eyebrow{display:flex;align-items:center;gap:10px;font:10px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.2em;text-transform:uppercase;color:#d1d9c3;margin:35px 0 22px}.dot{width:5px;height:5px;background:var(--accent);border-radius:50%;box-shadow:0 0 14px var(--accent)}
+    .title-wrap{position:relative;width:100%;max-width:1300px}h1{margin:0;font-family:'Clash Display','Arial Black',Arial,sans-serif;font-weight:600;font-size:clamp(90px,20.1vw,310px);line-height:.95;letter-spacing:-.065em;padding-right:.065em;background:linear-gradient(175deg,#fff 10%,#eef3e3 33%,#919b80 49%,#dfe6d2 53%,#fff 69%,#aeb99b 95%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 5px 25px #0005)}.title-wrap:after{content:"";position:absolute;height:1px;left:12%;right:12%;bottom:-23px;background:linear-gradient(90deg,transparent,#d6edac66,transparent)}
+    .intro{margin:51px 0 0;font-size:clamp(15px,1.6vw,20px);line-height:1.5;letter-spacing:-.035em;color:#dce2d2}.intro span{color:var(--muted)}.controls{pointer-events:auto;display:flex;gap:8px;align-items:center;margin-top:28px}.mode{border:1px solid #d6ebbb45;border-radius:50px;background:#0c100abd;color:var(--ink);padding:13px 20px;display:flex;gap:23px;align-items:center;cursor:pointer;font-size:11px;transition:background .25s,border-color .25s,transform .25s}.mode:hover{border-color:var(--accent);background:#20291b;transform:translateY(-2px)}.mode svg{width:15px;height:15px;color:var(--accent)}.pause{border:1px solid #d6ebbb30;background:#0c100abd;color:var(--muted);width:41px;height:41px;border-radius:50%;cursor:pointer;display:grid;place-items:center}.pause svg{width:12px;height:12px}.pause:hover{color:var(--accent);border-color:var(--accent)}
+    .orbit-label{position:absolute;top:25%;right:7%;font:9px/1.8 ui-monospace,monospace;letter-spacing:.12em;color:#aab59c;text-align:left}.orbit-label:before{content:"+";display:block;font-size:23px;color:var(--accent);margin-bottom:8px}.vertical{position:absolute;left:4.5%;top:43%;writing-mode:vertical-rl;transform:rotate(180deg);font:9px ui-monospace,monospace;letter-spacing:.22em;color:#87917c}
+    footer{bottom:30px;align-items:flex-end;font:10px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.06em}.footer-left{display:flex;gap:36px;align-items:flex-end}.footer-label{color:var(--muted);display:block;font-size:9px;letter-spacing:.14em;margin-bottom:7px}.footer-right{text-align:right;color:var(--muted)}.index{color:var(--accent);font-size:11px}.bottom-rule{position:absolute;bottom:95px;left:4.5%;right:4.5%;height:1px;background:var(--line);z-index:2}.corner{position:absolute;bottom:110px;right:4.5%;font:10px ui-monospace,monospace;color:#9ea990;letter-spacing:.14em}
+    .reveal{animation:enter 1.2s cubic-bezier(.16,1,.3,1) both}h1.reveal{animation-delay:.12s}.intro.reveal{animation-delay:.22s}.controls.reveal{animation-delay:.3s}@keyframes enter{from{opacity:0;transform:translateY(25px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+    @media(min-width:1800px){h1{font-size:310px}.scene{min-height:900px}}
+    @media(max-width:700px){.scene{min-height:650px}header{top:23px;left:6%;right:6%}.edition{display:none}.github{font-size:11px;gap:12px}main{padding:90px 5% 130px}.eyebrow{font-size:8px;letter-spacing:.15em;margin-top:0;margin-bottom:30px}h1{font-size:21vw;letter-spacing:-.065em}.intro{margin-top:43px;font-size:15px}.controls{margin-top:25px}.orbit-label{top:20%;right:7%;font-size:8px}.orbit-label:before{font-size:19px}.vertical{display:none}footer{left:6%;right:6%;bottom:25px;font-size:9px}.footer-left{gap:18px}.footer-label{font-size:8px}.footer-right .secondary{display:none}.bottom-rule{left:6%;right:6%;bottom:89px}.corner{right:6%;bottom:105px;font-size:8px}.fallback-halo{width:450px;height:450px;top:10%}}
+    @media(max-width:380px){.footer-left{gap:12px}.footer-label{letter-spacing:.05em}.intro{font-size:13px}.mode{padding:12px 15px}.footer-right{font-size:8px}}
+    @media(prefers-reduced-motion:reduce){.reveal{animation:none}*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
-  <div class="aurora" aria-hidden="true">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-  <canvas id="field" aria-hidden="true"></canvas>
+<div class="scene" id="scene">
+  <div class="grid" aria-hidden="true"></div><div class="fallback-halo" aria-hidden="true"></div><canvas id="field" aria-hidden="true"></canvas>
+  <header>
+    <a class="wordmark" href="https://jaryguo.github.io/" aria-label="Jary Guo home"><span class="mark" aria-hidden="true">j.</span> jaryguo</a>
+    <span class="edition">PERSONAL SPACE / VOL. 02</span>
+    <a class="github" href="https://github.com/JaryGuo" target="_blank" rel="noopener noreferrer">Explore GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></a>
+  </header>
+  <div class="orbit-label" aria-hidden="true">A LITTLE ORDER.<br>A LITTLE CHAOS.</div>
+  <div class="vertical" aria-hidden="true">INDEPENDENT MIND / INFINITE POSSIBILITIES</div>
   <main>
-    <h1>jaryguo</h1>
+    <p class="eyebrow reveal"><span class="dot" aria-hidden="true"></span> Somewhere between logic & imagination</p>
+    <div class="title-wrap"><h1 class="reveal">jaryguo</h1></div>
+    <p class="intro reveal">Code. Motion. Possibility.<br><span>Always building what comes next.</span></p>
+    <div class="controls reveal">
+      <button class="mode" id="mode" type="button" aria-label="Change light field color"><span>Shift the atmosphere</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m12 2 2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7z"/></svg></button>
+      <button class="pause" id="pause" type="button" aria-label="Pause animation" aria-pressed="false"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path id="pause-icon" d="M4 3h2v10H4zm6 0h2v10h-2z"/></svg></button>
+    </div>
   </main>
-  <script>
-    (function () {
-      var canvas = document.getElementById("field");
-      var ctx = canvas.getContext("2d");
-      if (!ctx) return;
-
-      var motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-      var pointer = { x: 0, y: 0, active: false };
-      var width = 0;
-      var height = 0;
-      var particles = [];
-      var raf = 0;
-      var running = false;
-
-      function rand(min, max) {
-        return min + Math.random() * (max - min);
+  <div class="corner" aria-live="polite" id="mode-label">01 / CHLOROPHYLL</div>
+  <div class="bottom-rule" aria-hidden="true"></div>
+  <footer><div class="footer-left"><div><span class="footer-label">THE APPROACH</span>Stay curious. Make things.</div><div><span class="footer-label">THE MEDIUM</span>Code & a little magic.</div></div><div class="footer-right"><span class="index">© <span id="year">2026</span> JARY GUO</span><br><span class="secondary">A SPACE IN CONSTANT MOTION</span></div></footer>
+</div>
+<script>
+(() => {
+  'use strict';
+  const canvas = document.getElementById('field');
+  const ctx = canvas.getContext('2d', { alpha: true });
+  const scene = document.getElementById('scene');
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const pauseButton = document.getElementById('pause');
+  const palettes = [
+    { name:'01 / CHLOROPHYLL', accent:'#ccff80', rgb:[188,235,124] },
+    { name:'02 / ULTRAVIOLET', accent:'#d1b1ff', rgb:[180,141,255] },
+    { name:'03 / SOLAR FLARE', accent:'#ffb485', rgb:[255,156,98] }
+  ];
+  let palette = 0, paused = motion.matches, width = 1, height = 1, dpr = 1;
+  let frame = 0, last = 0, elapsed = 0, lastDraw = 0, pulse = 0;
+  let px = 0, py = 0, tx = 0, ty = 0;
+  const stars = Array.from({length:65}, () => ({x:Math.random(),y:Math.random(),r:.3+Math.random()*.8,a:.15+Math.random()*.45}));
+  document.getElementById('year').textContent = new Date().getFullYear();
+  function updateButton() {
+    pauseButton.setAttribute('aria-pressed', String(paused));
+    pauseButton.setAttribute('aria-label', paused ? 'Resume animation' : 'Pause animation');
+    document.getElementById('pause-icon').setAttribute('d',paused?'M4 2l9 6-9 6z':'M4 3h2v10H4zm6 0h2v10h-2z');
+  }
+  function draw() {
+    if (!ctx) return;
+    const rgb = palettes[palette].rgb;
+    ctx.clearRect(0,0,width,height);
+    const cx=width*.5+px*18, cy=height*.39+py*15;
+    const radius=Math.min(width*.34,height*.36), time=elapsed*.00012;
+    const glow=ctx.createRadialGradient(cx,cy,0,cx,cy,radius*1.5);
+    glow.addColorStop(0,`rgba(${rgb},.015)`);glow.addColorStop(.52,`rgba(${rgb},.06)`);glow.addColorStop(1,`rgba(${rgb},0)`);
+    ctx.fillStyle=glow;ctx.fillRect(0,0,width,height);
+    for(const star of stars){ctx.fillStyle=`rgba(${rgb},${star.a})`;ctx.beginPath();ctx.arc(star.x*width,star.y*height,star.r,0,Math.PI*2);ctx.fill();}
+    // A projected, continuously morphing torus made from fine filaments.
+    const lines=width<700?30:44, steps=width<700?150:210;
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(-.28+px*.04);ctx.globalCompositeOperation='screen';
+    for(let j=0;j<lines;j++){
+      const v=j/lines*Math.PI*2;
+      ctx.beginPath();
+      for(let i=0;i<=steps;i++){
+        const u=i/steps*Math.PI*2;
+        const twist=v+u*3+time*.8;
+        const ripple=Math.sin(u*5-time*1.6)*.025;
+        const rr=radius*(1+.15*Math.cos(twist)+ripple+pulse*.035);
+        const x=rr*Math.cos(u), y=rr*Math.sin(u)*.70+radius*.19*Math.sin(twist);
+        if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
       }
-
-      function linkDistance() {
-        return Math.max(88, Math.min(150, Math.min(width, height) * 0.22));
-      }
-
-      function syncParticles() {
-        var count = Math.round(Math.max(28, Math.min(96, (width * height) / 17000)));
-        if (particles.length > count) {
-          particles.length = count;
-          return;
-        }
-        while (particles.length < count) {
-          particles.push({
-            x: rand(0, width),
-            y: rand(0, height),
-            vx: rand(-0.22, 0.22),
-            vy: rand(-0.22, 0.22),
-            r: rand(1.05, 2.15)
-          });
-        }
-      }
-
-      function draw() {
-        var maxLink = linkDistance();
-        var reach = 160;
-        var i, j, a, b, dx, dy, dist, alpha;
-
-        ctx.clearRect(0, 0, width, height);
-        ctx.lineWidth = 1;
-
-        for (i = 0; i < particles.length; i++) {
-          a = particles[i];
-          for (j = i + 1; j < particles.length; j++) {
-            b = particles[j];
-            dx = a.x - b.x;
-            dy = a.y - b.y;
-            dist = Math.hypot(dx, dy);
-            if (dist < maxLink) {
-              alpha = (1 - dist / maxLink) * 0.38;
-              ctx.strokeStyle = "rgba(168, 214, 255, " + alpha.toFixed(3) + ")";
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.stroke();
-            }
-          }
-
-          if (pointer.active) {
-            dx = a.x - pointer.x;
-            dy = a.y - pointer.y;
-            dist = Math.hypot(dx, dy);
-            if (dist < reach) {
-              alpha = (1 - dist / reach) * 0.55;
-              ctx.strokeStyle = "rgba(210, 236, 255, " + alpha.toFixed(3) + ")";
-              ctx.beginPath();
-              ctx.moveTo(pointer.x, pointer.y);
-              ctx.lineTo(a.x, a.y);
-              ctx.stroke();
-            }
-          }
-        }
-
-        for (i = 0; i < particles.length; i++) {
-          a = particles[i];
-          ctx.beginPath();
-          ctx.fillStyle = "rgba(150, 205, 255, 0.18)";
-          ctx.arc(a.x, a.y, a.r * 5, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.beginPath();
-          ctx.fillStyle = "rgba(236, 248, 255, 0.92)";
-          ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-
-      function tick() {
-        var reduced = motionQuery.matches;
-        var reach = 150;
-        var i, p, dx, dy, dist, pull, speed, cap;
-
-        if (!reduced) {
-          for (i = 0; i < particles.length; i++) {
-            p = particles[i];
-            if (pointer.active) {
-              dx = pointer.x - p.x;
-              dy = pointer.y - p.y;
-              dist = Math.hypot(dx, dy);
-              if (dist > 0.5 && dist < reach) {
-                pull = ((reach - dist) / reach) * 0.018;
-                p.vx += (dx / dist) * pull;
-                p.vy += (dy / dist) * pull;
-              }
-            }
-            p.vx *= 0.992;
-            p.vy *= 0.992;
-            speed = Math.hypot(p.vx, p.vy);
-            cap = 0.72;
-            if (speed > cap) {
-              p.vx = (p.vx / speed) * cap;
-              p.vy = (p.vy / speed) * cap;
-            } else if (speed < 0.05) {
-              p.vx += rand(-0.03, 0.03);
-              p.vy += rand(-0.03, 0.03);
-            }
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x <= 0) {
-              p.x = 0;
-              p.vx = Math.abs(p.vx);
-            } else if (p.x >= width) {
-              p.x = width;
-              p.vx = -Math.abs(p.vx);
-            }
-            if (p.y <= 0) {
-              p.y = 0;
-              p.vy = Math.abs(p.vy);
-            } else if (p.y >= height) {
-              p.y = height;
-              p.vy = -Math.abs(p.vy);
-            }
-          }
-        }
-
-        draw();
-        if (!reduced && running) {
-          raf = requestAnimationFrame(tick);
-        }
-      }
-
-      function resize() {
-        var dpr = Math.min(window.devicePixelRatio || 1, 2);
-        var i, p;
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = Math.max(1, Math.floor(width * dpr));
-        canvas.height = Math.max(1, Math.floor(height * dpr));
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        syncParticles();
-        for (i = 0; i < particles.length; i++) {
-          p = particles[i];
-          if (p.x < 0) p.x = 0;
-          if (p.y < 0) p.y = 0;
-          if (p.x > width) p.x = width;
-          if (p.y > height) p.y = height;
-        }
-        draw();
-      }
-
-      function setPointer(event, active) {
-        pointer.x = event.clientX;
-        pointer.y = event.clientY;
-        pointer.active = active;
-      }
-
-      function stopLoop() {
-        running = false;
-        cancelAnimationFrame(raf);
-      }
-
-      function startLoop() {
-        if (running || motionQuery.matches) return;
-        running = true;
-        raf = requestAnimationFrame(tick);
-      }
-
-      window.addEventListener("pointermove", function (event) {
-        setPointer(event, true);
-      }, { passive: true });
-      window.addEventListener("pointerdown", function (event) {
-        setPointer(event, true);
-      }, { passive: true });
-      window.addEventListener("pointerup", function () {
-        pointer.active = false;
-      });
-      window.addEventListener("pointercancel", function () {
-        pointer.active = false;
-      });
-      document.documentElement.addEventListener("pointerleave", function () {
-        pointer.active = false;
-      });
-      window.addEventListener("resize", resize);
-
-      function onMotionChange() {
-        if (motionQuery.matches) {
-          stopLoop();
-          draw();
-        } else {
-          startLoop();
-        }
-      }
-
-      if (typeof motionQuery.addEventListener === "function") {
-        motionQuery.addEventListener("change", onMotionChange);
-      } else if (typeof motionQuery.addListener === "function") {
-        motionQuery.addListener(onMotionChange);
-      }
-
-      document.addEventListener("visibilitychange", function () {
-        if (document.hidden) {
-          stopLoop();
-        } else {
-          startLoop();
-        }
-      });
-
-      resize();
-      startLoop();
-    })();
-  </script>
+      const alpha=.10+.20*Math.pow((Math.sin(v+time)+1)*.5,2);
+      ctx.strokeStyle=`rgba(${rgb},${alpha})`;ctx.lineWidth=.55;ctx.stroke();
+    }
+    // Small traveling highlights keep the orbit alive without heavy bloom.
+    for(let k=0;k<7;k++){
+      const a=time*(k%2?-.35:.5)+k*.9;
+      const x=radius*Math.cos(a), y=radius*Math.sin(a)*.70;
+      ctx.fillStyle=`rgba(${rgb},.8)`;ctx.beginPath();ctx.arc(x,y,k===0?2:1,0,Math.PI*2);ctx.fill();
+    }
+    ctx.restore();
+  }
+  function resize(){const rect=scene.getBoundingClientRect();width=rect.width;height=rect.height;dpr=Math.min(devicePixelRatio||1,1.5);if(ctx){canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw();}}
+  function stop(){cancelAnimationFrame(frame);frame=0;last=0;}
+  function tick(now){frame=0;if(paused||document.hidden||!ctx)return;const dt=last?Math.min(now-last,50):16;last=now;elapsed+=dt;px+=(tx-px)*Math.min(dt*.004,1);py+=(ty-py)*Math.min(dt*.004,1);pulse*=Math.exp(-dt*.003);if(now-lastDraw>=32){draw();lastDraw=now;}frame=requestAnimationFrame(tick);}
+  function start(){if(!frame&&!paused&&!document.hidden&&ctx)frame=requestAnimationFrame(tick);}
+  scene.addEventListener('pointermove', e=>{const r=scene.getBoundingClientRect();tx=(e.clientX-r.left)/width*2-1;ty=(e.clientY-r.top)/height*2-1;},{passive:true});
+  scene.addEventListener('pointerleave',()=>{tx=0;ty=0;});
+  document.getElementById('mode').addEventListener('click',()=>{palette=(palette+1)%palettes.length;document.documentElement.style.setProperty('--accent',palettes[palette].accent);document.getElementById('mode-label').textContent=palettes[palette].name;pulse=1;draw();});
+  pauseButton.addEventListener('click',()=>{paused=!paused;updateButton();if(paused)stop();else start();});
+  function onMotion(){paused=motion.matches;updateButton();if(paused){stop();draw();}else start();}
+  if(motion.addEventListener)motion.addEventListener('change',onMotion);else motion.addListener(onMotion);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else start();});
+  window.addEventListener('resize',resize,{passive:true});
+  if(ctx)scene.classList.add('canvas-ready');else{pauseButton.hidden=true;}
+  resize();updateButton();start();
+})();
+</script>
 </body>
 </html>
